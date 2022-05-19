@@ -15,7 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::inRandomOrder()->take(16)->get();
+
+        return view('products.index', compact('products'));
     }
 
     /**

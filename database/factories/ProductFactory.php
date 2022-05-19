@@ -28,6 +28,7 @@ class ProductFactory extends Factory
         return [
             'name' => $name,
             'description' => $this->faker->sentences(rand(2, 5), true),
+            'image' => $this->faker->imageUrl(),
             'slug' => Str::slug($name),
             'price' => rand(500, 10000),
             'active' => $this->faker->boolean(80)
