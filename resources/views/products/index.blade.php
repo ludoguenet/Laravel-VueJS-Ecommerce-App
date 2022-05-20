@@ -4,7 +4,6 @@
             {{ __('Nos produits') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Remove py-8 -->
@@ -42,10 +41,7 @@
                                         <p tabindex="0" class="focus:outline-none text-xs text-gray-600 px-2 bg-gray-200 py-1">Complete box</p>
                                     </div>
                                 </div> --}}
-                                <div class="flex items-center justify-between py-4">
-                                    <h2 tabindex="0" class="focus:outline-none text-white rounded-md cursor-pointer text-xs font-semibold px-3 py-2 bg-indigo-700">Ajouter au panier</h2>
-                                    <h3 tabindex="0" class="focus:outline-none text-indigo-700 text-xl font-semibold"></h3>
-                                </div>
+                                <add-to-cart :product-id="{{ $product->id }}"></add-to-cart>
                             </div>
                         </div>
                     </div>

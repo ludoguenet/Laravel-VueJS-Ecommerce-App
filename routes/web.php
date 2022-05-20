@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('cart/count', [CartController::class, 'count'])
+    ->name('cart.count');
 Route::resource('products', ProductController::class);
+Route::resource('cart', CartController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
