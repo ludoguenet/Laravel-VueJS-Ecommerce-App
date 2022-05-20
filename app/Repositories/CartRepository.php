@@ -10,7 +10,7 @@ class CartRepository
     {
         \Cart::session(auth()->user()->id)
             ->add([
-                'id' => uniqid(),
+                'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
@@ -25,6 +25,6 @@ class CartRepository
     {
         return \Cart::session(auth()->user()->id)
             ->getContent()
-            ->count();
+            ->sum('quantity');
     }
 }

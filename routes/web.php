@@ -24,6 +24,10 @@ Route::get('cart/count', [CartController::class, 'count'])
 Route::resource('products', ProductController::class);
 Route::resource('cart', CartController::class);
 
+Route::get('/clear', function () {
+    \Cart::session(auth()->user()->id)->clear();
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

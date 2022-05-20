@@ -10,16 +10,16 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from "vue";
-const state = reactive({ count: 0 });
-const emitter = require('tiny-emitter/instance');
+    import { onMounted, reactive } from "vue";
+    const state = reactive({ count: 0 });
+    const emitter = require('tiny-emitter/instance');
 
-emitter.on('refreshCartCount', function (count) {
-    state.count = count;
-});
+    emitter.on('refreshCartCount', function (count) {
+        state.count = count;
+    });
 
-onMounted( async () => {
-    let response = await axios.get('/cart/count');
-    state.count = response.data.count;
-})
+    onMounted( async () => {
+        let response = await axios.get('/cart/count');
+        state.count = response.data.count;
+    })
 </script>

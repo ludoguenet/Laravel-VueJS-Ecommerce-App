@@ -13,12 +13,15 @@
     const props = defineProps(['productId']);
     const emit = defineEmits(['refreshCartCount']);
     const emitter = require('tiny-emitter/instance');
- 
+    const { inject } = require('vue');
+    const toast = inject('toast');
+
     const addToCart = async () => {
         let response = await axios.post('/cart', {
             productId: props.productId
         });
-        
+
+        toast.success('Produit ajouté au panier!');
         emitter.emit('refreshCartCount', response.data.count);
     }
 </script>
