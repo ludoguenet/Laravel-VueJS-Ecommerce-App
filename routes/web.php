@@ -20,6 +20,8 @@ Route::get('/', function () {
 });
 
 Route::resource('products', ProductController::class);
+Route::get('shoppingCart', [CartController::class, 'index'])
+    ->name('cart.index');
 
 Route::get('/clear', function () {
     \Cart::session(auth()->user()->id)->clear();
