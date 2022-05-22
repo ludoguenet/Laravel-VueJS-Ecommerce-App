@@ -69,9 +69,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
-        //
+        $count = (new CartRepository())->delete($id);
+
+        return response()->json([
+            'count' => $count
+        ]);
     }
 
     public function count(): JsonResponse

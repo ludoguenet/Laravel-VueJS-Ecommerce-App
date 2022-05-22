@@ -11,7 +11,7 @@
 
 <script setup>
     import { onMounted, reactive } from "vue";
-    const state = reactive({ count: 0 });
+    const state = reactive( {count: 0} );
     const emitter = require('tiny-emitter/instance');
 
     emitter.on('refreshCartCount', function (count) {
@@ -20,8 +20,8 @@
 
     onMounted( async () => {
         await axios.get('/sanctum/csrf-cookie');
-
         let response = await axios.get('/api/cart/count');
+
         state.count = response.data.count;
     })
 </script>

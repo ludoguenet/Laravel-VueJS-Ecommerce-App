@@ -150,9 +150,14 @@
 
 <script setup>
 const { ref, onMounted, reactive } = require("vue");
+const emit = defineEmits(['refreshCartCount']);
+const emitter = require('tiny-emitter/instance');
 const products = ref({});
 
-const deleteProduct = (index) => {
+const deleteProduct = async (index) => {
+    let response = await axios.delete('/api/cart/' + products.value[index].id);
+    emitter.emit('refreshCartCount', response.data.count);
+
     delete products.value[index];
 }
 

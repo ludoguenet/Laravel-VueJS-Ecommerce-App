@@ -23,6 +23,13 @@ class CartRepository
         return $this->count();
     }
 
+    public function delete(string $rowId): int
+    {
+        \Cart::session(auth()->user()->id)->remove($rowId);
+
+        return $this->count();
+    }
+
     public function content(): Collection
     {
         return \Cart::session(auth()->user()->id)
