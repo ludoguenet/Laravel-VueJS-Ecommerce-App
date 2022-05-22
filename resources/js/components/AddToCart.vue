@@ -10,6 +10,8 @@
 </template>
 
 <script setup>
+    import useCart from '../composables/cart/addProduct.js';
+    const { addProduct, cartCount } = useCart();
     const props = defineProps(['productId']);
     const emit = defineEmits(['refreshCartCount']);
     const emitter = require('tiny-emitter/instance');
@@ -20,14 +22,12 @@
         await axios.get('/sanctum/csrf-cookie')
         await axios.get('/api/user')
             .then( async (res) => {
-                let response = await axios.post('/api/cart', {
-                    productId: props.productId
-                });
-
+                await addProduct(props.productId);
                 toast.success('Produit ajouté au panier!');
-                emitter.emit('refreshCartCount', response.data.count);
+                emitter.emit('refreshCartCount', cartCount);
             })
             .catch(err => {
+                console.log(err);
                 toast.error('Connectez-vous pour ajouter un produit au panier');
                 return;
             });
