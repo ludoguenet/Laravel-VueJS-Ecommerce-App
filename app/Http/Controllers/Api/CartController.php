@@ -15,9 +15,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        $cartContent = (new CartRepository())->content();
+
+        return response()->json([
+            'cartContent' => $cartContent
+        ]);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
+use Illuminate\Support\Collection;
 
 class CartRepository
 {
@@ -13,6 +14,7 @@ class CartRepository
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
+                'image' => $product->image,
                 'quantity' => 1,
                 'attributes' => [],
                 'associatedModel' => $product
@@ -21,10 +23,15 @@ class CartRepository
         return $this->count();
     }
 
-    public function count(): int
+    public function content(): Collection
     {
         return \Cart::session(auth()->user()->id)
-            ->getContent()
+            ->getContent();
+    }
+
+    public function count(): int
+    {
+        return $this->content()
             ->sum('quantity');
     }
 }
