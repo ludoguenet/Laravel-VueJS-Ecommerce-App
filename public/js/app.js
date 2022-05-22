@@ -24671,32 +24671,55 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var toast = inject('toast');
 
     var addToCart = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
+                _context2.next = 2;
                 return axios.get('/sanctum/csrf-cookie');
 
               case 2:
-                _context.next = 4;
-                return axios.post('/api/cart', {
-                  productId: props.productId
+                _context2.next = 4;
+                return axios.get('/api/user').then( /*#__PURE__*/function () {
+                  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
+                    var response;
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            _context.next = 2;
+                            return axios.post('/api/cart', {
+                              productId: props.productId
+                            });
+
+                          case 2:
+                            response = _context.sent;
+                            toast.success('Produit ajouté au panier!');
+                            emitter.emit('refreshCartCount', response.data.count);
+
+                          case 5:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x) {
+                    return _ref3.apply(this, arguments);
+                  };
+                }())["catch"](function (err) {
+                  toast.error('Connectez-vous pour ajouter un produit au panier');
+                  return;
                 });
 
               case 4:
-                response = _context.sent;
-                toast.success('Produit ajouté au panier!');
-                emitter.emit('refreshCartCount', response.data.count);
-
-              case 7:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function addToCart() {

@@ -20,6 +20,7 @@
 
     onMounted( async () => {
         await axios.get('/sanctum/csrf-cookie');
+        
         let response = await axios.get('/api/cart/count');
         state.count = response.data.count;
     })

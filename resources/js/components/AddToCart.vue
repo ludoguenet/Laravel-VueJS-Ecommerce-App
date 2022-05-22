@@ -17,12 +17,19 @@
     const toast = inject('toast');
 
     const addToCart = async () => {
-        await axios.get('/sanctum/csrf-cookie');
-        let response = await axios.post('/api/cart', {
-            productId: props.productId
-        });
+        await axios.get('/sanctum/csrf-cookie')
+        await axios.get('/api/user')
+            .then( async (res) => {
+                let response = await axios.post('/api/cart', {
+                    productId: props.productId
+                });
 
-        toast.success('Produit ajouté au panier!');
-        emitter.emit('refreshCartCount', response.data.count);
+                toast.success('Produit ajouté au panier!');
+                emitter.emit('refreshCartCount', response.data.count);
+            })
+            .catch(err => {
+                toast.error('Connectez-vous pour ajouter un produit au panier');
+                return;
+            });
     }
 </script>
