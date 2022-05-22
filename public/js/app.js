@@ -24678,16 +24678,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post('/cart', {
+                return axios.get('/sanctum/csrf-cookie');
+
+              case 2:
+                _context.next = 4;
+                return axios.post('/api/cart', {
                   productId: props.productId
                 });
 
-              case 2:
+              case 4:
                 response = _context.sent;
                 toast.success('Produit ajouté au panier!');
                 emitter.emit('refreshCartCount', response.data.count);
 
-              case 5:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -24759,13 +24763,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios.get('/cart/count');
+              return axios.get('/sanctum/csrf-cookie');
 
             case 2:
+              _context.next = 4;
+              return axios.get('/api/cart/count');
+
+            case 4:
               response = _context.sent;
               state.count = response.data.count;
 
-            case 4:
+            case 6:
             case "end":
               return _context.stop();
           }

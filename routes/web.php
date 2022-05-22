@@ -19,10 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('cart/count', [CartController::class, 'count'])
-    ->name('cart.count');
 Route::resource('products', ProductController::class);
-Route::resource('cart', CartController::class);
 
 Route::get('/clear', function () {
     \Cart::session(auth()->user()->id)->clear();

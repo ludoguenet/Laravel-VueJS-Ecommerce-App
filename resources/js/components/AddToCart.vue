@@ -17,7 +17,8 @@
     const toast = inject('toast');
 
     const addToCart = async () => {
-        let response = await axios.post('/cart', {
+        await axios.get('/sanctum/csrf-cookie');
+        let response = await axios.post('/api/cart', {
             productId: props.productId
         });
 
