@@ -130,7 +130,7 @@
                         Total
                     </div>
                     <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                        17,859.3€
+                        {{ cartTotal }}
                     </div>
                     </div>
                 <a href="#">
@@ -149,10 +149,10 @@
 </template>
 
 <script setup>
-const { ref, onMounted, reactive } = require("vue");
+const { onMounted, computed, ref } = require("vue");
 const emit = defineEmits(['refreshCartCount']);
 const emitter = require('tiny-emitter/instance');
-const products = ref({});
+const products = ref([]);
 
 const deleteProduct = async (index) => {
     let response = await axios.delete('/api/cart/' + products.value[index].id);
@@ -160,6 +160,12 @@ const deleteProduct = async (index) => {
 
     delete products.value[index];
 }
+
+const cartTotal = computed(() => {
+    const number = Object.values(products.value).reduce((acc, product) => acc += (product.quantity * product.price), 0) / 100;
+
+    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(number);
+})
 
 onMounted( async () => {
     let cartContent = await axios.get('/api/cart');
