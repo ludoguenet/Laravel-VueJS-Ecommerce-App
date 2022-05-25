@@ -29,7 +29,7 @@
                             <p class="mb-2 md:ml-4" v-text="product.name"></p>
                             <form action="" method="POST">
                             <button type="submit" class="text-gray-700 md:ml-4">
-                                <small v-on:click.prevent="deleteProduct(index)">(Remove item)</small>
+                                <small v-on:click.prevent="destroy(index)">(Remove item)</small>
                             </button>
                             </form>
                         </a>
@@ -37,13 +37,13 @@
                         <td class="justify-center md:justify-end md:flex mt-6">
                         <div class="w-20 h-10">
                             <div class="relative flex w-full h-8 space-x-5">
-                                <button v-on:click.prevent="decreaseQuantity(index)">-</button>
+                                <button v-on:click.prevent="decrease(index)">-</button>
                             <input
                                 readonly
                                 type="input"
                                 :value="product.quantity"
                                 class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
-                            <button v-on:click.prevent="increaseQuantity(index)">+</button>
+                            <button v-on:click.prevent="increase(index)">+</button>
                             </div>
                         </div>
                         </td>
@@ -155,35 +155,41 @@
 
 <script setup>
 import useCart from "../composables/cart/products.js";
-const { products, getProducts, cartCount } = useCart();
+import { priceFormat } from "../helpers/index.js";
+const {
+        products,
+        getProducts,
+        deleteProduct,
+        increaseQuantity,
+        decreaseQuantity,
+        cartCount
+} = useCart();
 const { onMounted, computed } = require("vue");
-const emit = defineEmits(['refreshCartCount']);
 const emitter = require('tiny-emitter/instance');
+const emit = defineEmits(['refreshCartCount']);
 
-const deleteProduct = async (index) => {
-    let response = await axios.delete('/api/cart/' + products.value[index].id);
-    emitter.emit('refreshCartCount', response.data.count);
-
-    getProducts();
-}
-
-const decreaseQuantity = async (index) => {
-    await axios.put('/api/cart/decrease/' + products.value[index].id);
+const destroy = async (index) => {
+    await deleteProduct(index);
     await getProducts();
     emitter.emit('refreshCartCount', cartCount.value);
 }
 
-const increaseQuantity = async (index) => {
-    await axios.put('/api/cart/increase/' + products.value[index].id);
+const increase = async (index) => {
+    await increaseQuantity(index);
     await getProducts();
-    console.log(cartCount.value)
+    emitter.emit('refreshCartCount', cartCount.value);
+}
+
+const decrease= async (index) => {
+    await decreaseQuantity(index);
+    await getProducts();
     emitter.emit('refreshCartCount', cartCount.value);
 }
 
 const cartTotal = computed(() => {
-    const number = Object.values(products.value).reduce((acc, product) => acc += (product.quantity * product.price), 0) / 100;
+    const price = Object.values(products.value).reduce((acc, product) => acc += (product.quantity * product.price), 0);
 
-    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(number);
+    return priceFormat(price);
 });
 
 onMounted( async () => {

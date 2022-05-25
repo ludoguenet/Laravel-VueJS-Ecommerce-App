@@ -24837,11 +24837,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../composables/cart/products.js */ "./resources/js/composables/cart/products.js");
+/* harmony import */ var _helpers_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/index.js */ "./resources/js/helpers/index.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -24854,6 +24856,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _useCart = (0,_composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__["default"])(),
         products = _useCart.products,
         getProducts = _useCart.getProducts,
+        deleteProduct = _useCart.deleteProduct,
+        increaseQuantity = _useCart.increaseQuantity,
+        decreaseQuantity = _useCart.decreaseQuantity,
         cartCount = _useCart.cartCount;
 
     var _require = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js"),
@@ -24862,20 +24867,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var emitter = __webpack_require__(/*! tiny-emitter/instance */ "./node_modules/tiny-emitter/instance.js");
 
-    var deleteProduct = /*#__PURE__*/function () {
+    var destroy = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(index) {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios["delete"]('/api/cart/' + products.value[index].id);
+                return deleteProduct(index);
 
               case 2:
-                response = _context.sent;
-                emitter.emit('refreshCartCount', response.data.count);
-                getProducts();
+                _context.next = 4;
+                return getProducts();
+
+              case 4:
+                emitter.emit('refreshCartCount', cartCount.value);
 
               case 5:
               case "end":
@@ -24885,19 +24891,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }));
 
-      return function deleteProduct(_x) {
+      return function destroy(_x) {
         return _ref2.apply(this, arguments);
       };
     }();
 
-    var decreaseQuantity = /*#__PURE__*/function () {
+    var increase = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(index) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios.put('/api/cart/decrease/' + products.value[index].id);
+                return increaseQuantity(index);
 
               case 2:
                 _context2.next = 4;
@@ -24914,29 +24920,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }));
 
-      return function decreaseQuantity(_x2) {
+      return function increase(_x2) {
         return _ref3.apply(this, arguments);
       };
     }();
 
-    var increaseQuantity = /*#__PURE__*/function () {
+    var decrease = /*#__PURE__*/function () {
       var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(index) {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios.put('/api/cart/increase/' + products.value[index].id);
+                return decreaseQuantity(index);
 
               case 2:
                 _context3.next = 4;
                 return getProducts();
 
               case 4:
-                console.log(cartCount.value);
                 emitter.emit('refreshCartCount', cartCount.value);
 
-              case 6:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -24944,19 +24949,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }));
 
-      return function increaseQuantity(_x3) {
+      return function decrease(_x3) {
         return _ref4.apply(this, arguments);
       };
     }();
 
     var cartTotal = computed(function () {
-      var number = Object.values(products.value).reduce(function (acc, product) {
+      var price = Object.values(products.value).reduce(function (acc, product) {
         return acc += product.quantity * product.price;
-      }, 0) / 100;
-      return new Intl.NumberFormat('fr-FR', {
-        style: 'currency',
-        currency: 'EUR'
-      }).format(number);
+      }, 0);
+      return (0,_helpers_index_js__WEBPACK_IMPORTED_MODULE_2__.priceFormat)(price);
     });
     onMounted( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
@@ -24975,16 +24977,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var __returned__ = {
       products: products,
       getProducts: getProducts,
+      deleteProduct: deleteProduct,
+      increaseQuantity: increaseQuantity,
+      decreaseQuantity: decreaseQuantity,
       cartCount: cartCount,
       onMounted: onMounted,
       computed: computed,
-      emit: emit,
       emitter: emitter,
-      deleteProduct: deleteProduct,
-      decreaseQuantity: decreaseQuantity,
-      increaseQuantity: increaseQuantity,
+      emit: emit,
+      destroy: destroy,
+      increase: increase,
+      decrease: decrease,
       cartTotal: cartTotal,
-      useCart: _composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__["default"]
+      useCart: _composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+      priceFormat: _helpers_index_js__WEBPACK_IMPORTED_MODULE_2__.priceFormat
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -25316,13 +25322,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-        return $setup.deleteProduct(index);
+        return $setup.destroy(index);
       }, ["prevent"])
     }, "(Remove item)", 8
     /* PROPS */
     , _hoisted_13)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-        return $setup.decreaseQuantity(index);
+        return $setup.decrease(index);
       }, ["prevent"])
     }, "-", 8
     /* PROPS */
@@ -25335,7 +25341,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_18), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-        return $setup.increaseQuantity(index);
+        return $setup.increase(index);
       }, ["prevent"])
     }, "+", 8
     /* PROPS */
@@ -25503,13 +25509,102 @@ function useCart() {
     };
   }();
 
+  var decreaseQuantity = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(index) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.next = 2;
+              return axios.put('/api/cart/decrease/' + products.value[index].id);
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function decreaseQuantity(_x2) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var increaseQuantity = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(index) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return axios.put('/api/cart/increase/' + products.value[index].id);
+
+            case 2:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function increaseQuantity(_x3) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  var deleteProduct = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(index) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return axios["delete"]('/api/cart/' + products.value[index].id);
+
+            case 2:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    return function deleteProduct(_x4) {
+      return _ref5.apply(this, arguments);
+    };
+  }();
+
   return {
     addProduct: addProduct,
     cartCount: cartCount,
     getProducts: getProducts,
+    deleteProduct: deleteProduct,
+    increaseQuantity: increaseQuantity,
+    decreaseQuantity: decreaseQuantity,
     products: products
   };
 }
+
+/***/ }),
+
+/***/ "./resources/js/helpers/index.js":
+/*!***************************************!*\
+  !*** ./resources/js/helpers/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "priceFormat": () => (/* binding */ priceFormat)
+/* harmony export */ });
+var priceFormat = function priceFormat(price) {
+  return new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(price / 100);
+};
 
 /***/ }),
 

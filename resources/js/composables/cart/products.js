@@ -8,7 +8,6 @@ export default function useCart() {
         let response = await axios.post('/api/cart', {
             productId: productId
         });
-
         cartCount.value = response.data.cartCount;
     }
 
@@ -18,10 +17,25 @@ export default function useCart() {
         cartCount.value = cartContent.data.cartCount;
     }
 
+    const decreaseQuantity = async (index) => {
+        await axios.put('/api/cart/decrease/' + products.value[index].id);
+    }
+    
+    const increaseQuantity = async (index) => {
+        await axios.put('/api/cart/increase/' + products.value[index].id);
+    }
+
+    const deleteProduct = async (index) => {
+        await axios.delete('/api/cart/' + products.value[index].id);
+    }
+
     return {
         addProduct,
         cartCount,
         getProducts,
+        deleteProduct,
+        increaseQuantity,
+        decreaseQuantity,
         products
     }
 }
