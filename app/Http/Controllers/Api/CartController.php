@@ -51,16 +51,14 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function decreaseQuantity(int $id)
     {
-        //
+        (new CartRepository())->decreaseQuantity($id);
+    }
+
+    public function increaseQuantity(int $id)
+    {
+        (new CartRepository())->increaseQuantity($id);
     }
 
     /**

@@ -41,4 +41,20 @@ class CartRepository
         return $this->content()
             ->sum('quantity');
     }
+
+    public function decreaseQuantity(int $id): void
+    {
+        \Cart::session(auth()->user()->id)
+            ->update($id, array(
+                'quantity' => -1
+            ));
+    }
+
+    public function increaseQuantity(int $id): void
+    {
+        \Cart::session(auth()->user()->id)
+            ->update($id, array(
+                'quantity' => +1
+            ));
+    }
 }

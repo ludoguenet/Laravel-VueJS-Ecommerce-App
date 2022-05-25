@@ -36,9 +36,14 @@
                         </td>
                         <td class="justify-center md:justify-end md:flex mt-6">
                         <div class="w-20 h-10">
-                            <div class="relative flex flex-row w-full h-8">
-                            <input type="number" :value="product.quantity" 
-                            class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                            <div class="relative flex w-full h-8 space-x-5">
+                                <button v-on:click.prevent="decreaseQuantity(index)">-</button>
+                            <input
+                                readonly
+                                type="input"
+                                :value="product.quantity"
+                                class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                            <button v-on:click.prevent="increaseQuantity(index)">+</button>
                             </div>
                         </div>
                         </td>
@@ -149,16 +154,27 @@
 </template>
 
 <script setup>
+import useCart from "../composables/cart/products.js";
+const { products, getProducts } = useCart();
 const { onMounted, computed, ref } = require("vue");
 const emit = defineEmits(['refreshCartCount']);
 const emitter = require('tiny-emitter/instance');
-const products = ref([]);
 
 const deleteProduct = async (index) => {
     let response = await axios.delete('/api/cart/' + products.value[index].id);
     emitter.emit('refreshCartCount', response.data.count);
 
-    delete products.value[index];
+    getProducts();
+}
+
+const decreaseQuantity = async (index) => {
+    await axios.put('/api/cart/decrease/' + products.value[index].id);
+    getProducts();
+}
+
+const increaseQuantity = async (index) => {
+    await axios.put('/api/cart/increase/' + products.value[index].id);
+    getProducts();
 }
 
 const cartTotal = computed(() => {
@@ -168,7 +184,6 @@ const cartTotal = computed(() => {
 })
 
 onMounted( async () => {
-    let cartContent = await axios.get('/api/cart');
-    products.value = cartContent.data.cartContent;
+    getProducts();
 });
 </script>

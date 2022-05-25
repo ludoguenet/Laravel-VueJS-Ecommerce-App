@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-    import useCart from '../composables/cart/addProduct.js';
+    import useCart from '../composables/cart/products.js';
     const { addProduct, cartCount } = useCart();
     const props = defineProps(['productId']);
     const emit = defineEmits(['refreshCartCount']);
