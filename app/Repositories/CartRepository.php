@@ -42,19 +42,29 @@ class CartRepository
             ->sum('quantity');
     }
 
-    public function decreaseQuantity(int $id): void
+    public function decreaseQuantity(int $rowId)
     {
+        if ($this->getItem($rowId)->quantity === 1) {
+            return $this->delete($rowId);
+        }
+
         \Cart::session(auth()->user()->id)
-            ->update($id, array(
-                'quantity' => -1
+            ->update($rowId, array(
+                'quantity' => - 1
             ));
     }
 
-    public function increaseQuantity(int $id): void
+    public function increaseQuantity(int $rowId): void
     {
         \Cart::session(auth()->user()->id)
-            ->update($id, array(
-                'quantity' => +1
+            ->update($rowId, array(
+                'quantity' => + 1
             ));
+    }
+
+    private function getItem(int $rowId)
+    {
+        return \Cart::session(auth()->user()->id)
+            ->get($rowId);
     }
 }

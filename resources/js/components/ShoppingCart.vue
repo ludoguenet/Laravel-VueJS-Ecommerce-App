@@ -155,8 +155,8 @@
 
 <script setup>
 import useCart from "../composables/cart/products.js";
-const { products, getProducts } = useCart();
-const { onMounted, computed, ref } = require("vue");
+const { products, getProducts, cartCount } = useCart();
+const { onMounted, computed } = require("vue");
 const emit = defineEmits(['refreshCartCount']);
 const emitter = require('tiny-emitter/instance');
 
@@ -169,19 +169,22 @@ const deleteProduct = async (index) => {
 
 const decreaseQuantity = async (index) => {
     await axios.put('/api/cart/decrease/' + products.value[index].id);
-    getProducts();
+    await getProducts();
+    emitter.emit('refreshCartCount', cartCount.value);
 }
 
 const increaseQuantity = async (index) => {
     await axios.put('/api/cart/increase/' + products.value[index].id);
-    getProducts();
+    await getProducts();
+    console.log(cartCount.value)
+    emitter.emit('refreshCartCount', cartCount.value);
 }
 
 const cartTotal = computed(() => {
     const number = Object.values(products.value).reduce((acc, product) => acc += (product.quantity * product.price), 0) / 100;
 
     return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(number);
-})
+});
 
 onMounted( async () => {
     getProducts();

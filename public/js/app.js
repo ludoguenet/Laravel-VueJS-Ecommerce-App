@@ -24853,12 +24853,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var _useCart = (0,_composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__["default"])(),
         products = _useCart.products,
-        getProducts = _useCart.getProducts;
+        getProducts = _useCart.getProducts,
+        cartCount = _useCart.cartCount;
 
     var _require = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js"),
         onMounted = _require.onMounted,
-        computed = _require.computed,
-        ref = _require.ref;
+        computed = _require.computed;
 
     var emitter = __webpack_require__(/*! tiny-emitter/instance */ "./node_modules/tiny-emitter/instance.js");
 
@@ -24900,9 +24900,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.put('/api/cart/decrease/' + products.value[index].id);
 
               case 2:
-                getProducts();
+                _context2.next = 4;
+                return getProducts();
 
-              case 3:
+              case 4:
+                emitter.emit('refreshCartCount', cartCount.value);
+
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -24925,9 +24929,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios.put('/api/cart/increase/' + products.value[index].id);
 
               case 2:
-                getProducts();
+                _context3.next = 4;
+                return getProducts();
 
-              case 3:
+              case 4:
+                console.log(cartCount.value);
+                emitter.emit('refreshCartCount', cartCount.value);
+
+              case 6:
               case "end":
                 return _context3.stop();
             }
@@ -24966,9 +24975,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var __returned__ = {
       products: products,
       getProducts: getProducts,
+      cartCount: cartCount,
       onMounted: onMounted,
       computed: computed,
-      ref: ref,
       emit: emit,
       emitter: emitter,
       deleteProduct: deleteProduct,
@@ -25434,7 +25443,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 function useCart() {
-  var cartCount = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
+  var cartCount = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(0);
   var products = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
 
   var addProduct = /*#__PURE__*/function () {
@@ -25451,7 +25460,7 @@ function useCart() {
 
             case 2:
               response = _context.sent;
-              cartCount.value = response.data.count;
+              cartCount.value = response.data.cartCount;
 
             case 4:
             case "end":
@@ -25479,8 +25488,9 @@ function useCart() {
             case 2:
               cartContent = _context2.sent;
               products.value = cartContent.data.cartContent;
+              cartCount.value = cartContent.data.cartCount;
 
-            case 4:
+            case 5:
             case "end":
               return _context2.stop();
           }

@@ -1,7 +1,7 @@
 import { ref } from "vue";
 
 export default function useCart() {
-    const cartCount = ref(null);
+    const cartCount = ref(0);
     const products = ref([]);
 
     const addProduct = async (productId) => {
@@ -9,12 +9,13 @@ export default function useCart() {
             productId: productId
         });
 
-        cartCount.value = response.data.count;
+        cartCount.value = response.data.cartCount;
     }
 
     const getProducts = async () => {
         let cartContent = await axios.get('/api/cart');
         products.value = cartContent.data.cartContent;
+        cartCount.value = cartContent.data.cartCount;
     }
 
     return {
