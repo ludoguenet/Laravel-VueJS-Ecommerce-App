@@ -13,7 +13,6 @@
     import useCart from '../composables/cart/products.js';
     const { addProduct, cartCount } = useCart();
     const props = defineProps(['productId']);
-    const emit = defineEmits(['refreshCartCount']);
     const emitter = require('tiny-emitter/instance');
     const { inject } = require('vue');
     const toast = inject('toast');

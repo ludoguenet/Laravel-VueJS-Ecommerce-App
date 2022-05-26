@@ -24658,10 +24658,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['productId'],
-  emits: ['refreshCartCount'],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose,
-        emit = _ref.emit;
+    var expose = _ref.expose;
     expose();
     var props = __props;
 
@@ -24734,7 +24732,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       addProduct: addProduct,
       cartCount: cartCount,
       props: props,
-      emit: emit,
       emitter: emitter,
       inject: inject,
       toast: toast,
@@ -24847,10 +24844,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  emits: ['refreshCartCount'],
   setup: function setup(__props, _ref) {
-    var expose = _ref.expose,
-        emit = _ref.emit;
+    var expose = _ref.expose;
     expose();
 
     var _useCart = (0,_composables_cart_products_js__WEBPACK_IMPORTED_MODULE_1__["default"])(),
@@ -24984,7 +24979,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       onMounted: onMounted,
       computed: computed,
       emitter: emitter,
-      emit: emit,
       destroy: destroy,
       increase: increase,
       decrease: decrease,

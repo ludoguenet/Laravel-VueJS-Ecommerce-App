@@ -166,7 +166,6 @@ const {
 } = useCart();
 const { onMounted, computed } = require("vue");
 const emitter = require('tiny-emitter/instance');
-const emit = defineEmits(['refreshCartCount']);
 
 const destroy = async (index) => {
     await deleteProduct(index);
