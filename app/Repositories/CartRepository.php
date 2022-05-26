@@ -42,6 +42,12 @@ class CartRepository
             ->sum('quantity');
     }
 
+    public function total(): int
+    {
+        return \Cart::session(auth()->user()->id)
+            ->getTotal();
+    }
+
     public function decreaseQuantity(int $rowId)
     {
         if ($this->getItem($rowId)->quantity === 1) {
