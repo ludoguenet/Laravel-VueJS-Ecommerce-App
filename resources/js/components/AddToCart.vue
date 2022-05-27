@@ -20,13 +20,12 @@
     const addToCart = async () => {
         await axios.get('/sanctum/csrf-cookie')
         await axios.get('/api/user')
-            .then( async (res) => {
+            .then(async () => {
                 await addProduct(props.productId);
                 toast.success('Produit ajouté au panier!');
                 emitter.emit('refreshCartCount', cartCount);
             })
-            .catch(err => {
-                console.log(err);
+            .catch(() => {
                 toast.error('Connectez-vous pour ajouter un produit au panier');
                 return;
             });

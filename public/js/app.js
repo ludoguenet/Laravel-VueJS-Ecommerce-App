@@ -24685,32 +24685,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 _context2.next = 4;
-                return axios.get('/api/user').then( /*#__PURE__*/function () {
-                  var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            _context.next = 2;
-                            return addProduct(props.productId);
+                return axios.get('/api/user').then( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          _context.next = 2;
+                          return addProduct(props.productId);
 
-                          case 2:
-                            toast.success('Produit ajouté au panier!');
-                            emitter.emit('refreshCartCount', cartCount);
+                        case 2:
+                          toast.success('Produit ajouté au panier!');
+                          emitter.emit('refreshCartCount', cartCount);
 
-                          case 4:
-                          case "end":
-                            return _context.stop();
-                        }
+                        case 4:
+                        case "end":
+                          return _context.stop();
                       }
-                    }, _callee);
-                  }));
-
-                  return function (_x) {
-                    return _ref3.apply(this, arguments);
-                  };
-                }())["catch"](function (err) {
-                  console.log(err);
+                    }
+                  }, _callee);
+                })))["catch"](function () {
                   toast.error('Connectez-vous pour ajouter un produit au panier');
                   return;
                 });
@@ -25210,18 +25203,18 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "hidden md:table-cell"
 }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "text-left"
-}, "Product"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Produits"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "lg:text-right text-left pl-5 lg:pl-0"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "lg:hidden",
-  title: "Quantity"
+  title: "Quantité"
 }, "Qtd"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "hidden lg:inline"
-}, "Quantity")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Quantité")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "hidden text-right md:table-cell"
-}, "Unit price"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "Prix unitaire"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "text-right"
-}, "Total price")])], -1
+}, "Prix total")])], -1
 /* HOISTED */
 );
 
@@ -25273,137 +25266,38 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_25 = {
-  "class": "my-4 mt-6 -mx-2 lg:flex"
+  "class": "my-4 mt-6 -mx-2 lg:flex justify-end"
 };
-
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "lg:px-2 lg:w-1/2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "p-4 bg-gray-100 rounded-full"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "ml-2 font-bold uppercase"
-}, "Coupon Code")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "p-4"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-4 italic"
-}, "If you have a coupon code, please enter it in the box below"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "justify-center md:flex"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-  action: "",
-  method: "POST"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border rounded-full"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "coupon",
-  name: "code",
-  id: "coupon",
-  placeholder: "Apply coupon",
-  value: "90off",
-  "class": "w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "aria-hidden": "true",
-  "data-prefix": "fas",
-  "data-icon": "gift",
-  "class": "w-8",
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 512 512"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  fill: "currentColor",
-  d: "M32 448c0 17.7 14.3 32 32 32h160V320H32v128zm256 32h160c17.7 0 32-14.3 32-32V320H288v160zm192-320h-42.1c6.2-12.1 10.1-25.5 10.1-40 0-48.5-39.5-88-88-88-41.6 0-68.5 21.3-103 68.3-34.5-47-61.4-68.3-103-68.3-48.5 0-88 39.5-88 88 0 14.5 3.8 27.9 10.1 40H32c-17.7 0-32 14.3-32 32v80c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-80c0-17.7-14.3-32-32-32zm-326.1 0c-22.1 0-40-17.9-40-40s17.9-40 40-40c19.9 0 34.6 3.3 86.1 80h-86.1zm206.1 0h-86.1c51.4-76.5 65.7-80 86.1-80 22.1 0 40 17.9 40 40s-17.9 40-40 40z"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "font-medium"
-}, "Apply coupon")])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "p-4 mt-6 bg-gray-100 rounded-full"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
-  "class": "ml-2 font-bold uppercase"
-}, "Instruction for seller")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "p-4"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-4 italic"
-}, "If you have some information for the seller you can leave them in the box below"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
-  "class": "w-full h-24 p-2 bg-gray-100 rounded"
-})])], -1
-/* HOISTED */
-);
-
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "lg:px-2 lg:w-1/2"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "p-4 bg-gray-100 rounded-full"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   "class": "ml-2 font-bold uppercase"
-}, "Order Details")], -1
+}, "Détails de la commande")], -1
 /* HOISTED */
 );
 
+var _hoisted_28 = {
+  "class": "p-4"
+};
 var _hoisted_29 = {
-  "class": "p-4"
-};
-
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-6 italic"
-}, "Shipping and additionnal costs are calculated based on values you have entered", -1
-/* HOISTED */
-);
-
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex justify-between border-b"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800"
-}, " Subtotal "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900"
-}, " 148,827.53€ ")], -1
-/* HOISTED */
-);
-
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex justify-between pt-4 border-b"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-  action: "",
-  method: "POST"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "submit",
-  "class": "mr-2 mt-1 lg:mt-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  "aria-hidden": "true",
-  "data-prefix": "far",
-  "data-icon": "trash-alt",
-  "class": "w-4 text-red-600 hover:text-red-800",
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 448 512"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  fill: "currentColor",
-  d: "M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z"
-})])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Coupon \"90off\" ")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700"
-}, " -133,944.77€ ")], -1
-/* HOISTED */
-);
-
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-between pt-4 border-b\"><div class=\"lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800\"> New Subtotal </div><div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900\"> 14,882.75€ </div></div><div class=\"flex justify-between pt-4 border-b\"><div class=\"lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800\"> Tax </div><div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900\"> 2,976.55€ </div></div>", 2);
-
-var _hoisted_35 = {
   "class": "flex justify-between pt-4 border-b"
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800"
 }, " Total ", -1
 /* HOISTED */
 );
 
-var _hoisted_37 = {
+var _hoisted_31 = {
   "class": "lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900"
 };
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<a href=\"/checkout\"><button class=\"flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none\"><svg aria-hidden=\"true\" data-prefix=\"far\" data-icon=\"credit-card\" class=\"w-8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\"><path fill=\"currentColor\" d=\"M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z\"></path></svg><span class=\"ml-2 mt-5px\">Procceed to checkout</span></button></a>", 1);
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<a href=\"/checkout\"><button class=\"flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none\"><svg aria-hidden=\"true\" data-prefix=\"far\" data-icon=\"credit-card\" class=\"w-8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\"><path fill=\"currentColor\" d=\"M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z\"></path></svg><span class=\"ml-2 mt-5px\">Passer à la caisse</span></button></a>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.products, function (product, index) {
@@ -25424,7 +25318,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return $setup.destroy(index);
       }, ["prevent"])
-    }, "(Remove item)", 8
+    }, "(supprimer du panier)", 8
     /* PROPS */
     , _hoisted_13)])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
@@ -25447,20 +25341,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , _hoisted_19)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
       "class": "text-sm lg:text-base font-medium",
-      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price / 100)
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.priceFormat(product.price))
     }, null, 8
     /* PROPS */
     , _hoisted_21)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
       "class": "text-sm lg:text-base font-medium",
-      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price * product.quantity / 100)
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.priceFormat(product.price * product.quantity))
     }, null, 8
     /* PROPS */
     , _hoisted_23)])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, _hoisted_31, _hoisted_32, _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartTotal), 1
+  ))])]), _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"lg:px-2 lg:w-1/2\">\r\n            <div class=\"p-4 bg-gray-100 rounded-full\">\r\n                <h1 class=\"ml-2 font-bold uppercase\">Coupon Code</h1>\r\n            </div>\r\n            <div class=\"p-4\">\r\n                <p class=\"mb-4 italic\">If you have a coupon code, please enter it in the box below</p>\r\n                <div class=\"justify-center md:flex\">\r\n                <form action=\"\" method=\"POST\">\r\n                    <div class=\"flex items-center w-full h-13 pl-3 bg-white bg-gray-100 border rounded-full\">\r\n                        <input type=\"coupon\" name=\"code\" id=\"coupon\" placeholder=\"Apply coupon\" value=\"90off\"\r\n                                class=\"w-full bg-gray-100 outline-none appearance-none focus:outline-none active:outline-none\"/>\r\n                        <button type=\"submit\" class=\"text-sm flex items-center px-3 py-1 text-white bg-gray-800 rounded-full outline-none md:px-4 hover:bg-gray-700 focus:outline-none active:outline-none\">\r\n                            <svg aria-hidden=\"true\" data-prefix=\"fas\" data-icon=\"gift\" class=\"w-8\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path fill=\"currentColor\" d=\"M32 448c0 17.7 14.3 32 32 32h160V320H32v128zm256 32h160c17.7 0 32-14.3 32-32V320H288v160zm192-320h-42.1c6.2-12.1 10.1-25.5 10.1-40 0-48.5-39.5-88-88-88-41.6 0-68.5 21.3-103 68.3-34.5-47-61.4-68.3-103-68.3-48.5 0-88 39.5-88 88 0 14.5 3.8 27.9 10.1 40H32c-17.7 0-32 14.3-32 32v80c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16v-80c0-17.7-14.3-32-32-32zm-326.1 0c-22.1 0-40-17.9-40-40s17.9-40 40-40c19.9 0 34.6 3.3 86.1 80h-86.1zm206.1 0h-86.1c51.4-76.5 65.7-80 86.1-80 22.1 0 40 17.9 40 40s-17.9 40-40 40z\"/></svg>\r\n                            <span class=\"font-medium\">Apply coupon</span>\r\n                        </button>\r\n                    </div>\r\n                </form>\r\n                </div>\r\n            </div>\r\n            <div class=\"p-4 mt-6 bg-gray-100 rounded-full\">\r\n                <h1 class=\"ml-2 font-bold uppercase\">Instruction for seller</h1>\r\n            </div>\r\n            <div class=\"p-4\">\r\n                <p class=\"mb-4 italic\">If you have some information for the seller you can leave them in the box below</p>\r\n                <textarea class=\"w-full h-24 p-2 bg-gray-100 rounded\"></textarea>\r\n            </div>\r\n            </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <p class=\"mb-6 italic\">Shipping and additionnal costs are calculated based on values you have entered</p>\r\n                <div class=\"flex justify-between border-b\">\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800\">\r\n                    Subtotal\r\n                    </div>\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900\">\r\n                    148,827.53€\r\n                    </div>\r\n                </div>\r\n                    <div class=\"flex justify-between pt-4 border-b\">\r\n                    <div class=\"flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800\">\r\n                        <form action=\"\" method=\"POST\">\r\n                        <button type=\"submit\" class=\"mr-2 mt-1 lg:mt-2\">\r\n                            <svg aria-hidden=\"true\" data-prefix=\"far\" data-icon=\"trash-alt\" class=\"w-4 text-red-600 hover:text-red-800\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path fill=\"currentColor\" d=\"M268 416h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12zM432 80h-82.41l-34-56.7A48 48 0 00274.41 0H173.59a48 48 0 00-41.16 23.3L98.41 80H16A16 16 0 000 96v16a16 16 0 0016 16h16v336a48 48 0 0048 48h288a48 48 0 0048-48V128h16a16 16 0 0016-16V96a16 16 0 00-16-16zM171.84 50.91A6 6 0 01177 48h94a6 6 0 015.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0012-12V188a12 12 0 00-12-12h-24a12 12 0 00-12 12v216a12 12 0 0012 12z\"/></svg>\r\n                        </button>\r\n                        </form>\r\n                        Coupon \"90off\"\r\n                    </div>\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700\">\r\n                        -133,944.77€\r\n                    </div>\r\n                    </div>\r\n                    <div class=\"flex justify-between pt-4 border-b\">\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800\">\r\n                        New Subtotal\r\n                    </div>\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900\">\r\n                        14,882.75€\r\n                    </div>\r\n                    </div>\r\n                    <div class=\"flex justify-between pt-4 border-b\">\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800\">\r\n                        Tax\r\n                    </div>\r\n                    <div class=\"lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900\">\r\n                        2,976.55€\r\n                    </div>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartTotal), 1
   /* TEXT */
-  )]), _hoisted_38])])])])])])]);
+  )]), _hoisted_32])])])])])])]);
 }
 
 /***/ }),
@@ -25491,7 +25385,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
+var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)();
 app.use(_meforma_vue_toaster__WEBPACK_IMPORTED_MODULE_6__["default"]).provide('toast', app.config.globalProperties.$toast);
 app.component('AddToCart', _components_AddToCart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]).component('NavbarCart', _components_NavbarCart_vue__WEBPACK_IMPORTED_MODULE_3__["default"]).component('ShoppingCart', _components_ShoppingCart_vue__WEBPACK_IMPORTED_MODULE_4__["default"]).component('Checkout', _components_Checkout_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.mount('#app');

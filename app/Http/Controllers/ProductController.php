@@ -15,7 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::inRandomOrder()->take(16)->get();
+        $products = Product::inRandomOrder()
+            ->whereActive(true)
+            ->take(16)
+            ->get();
 
         return view('products.index', compact('products'));
     }

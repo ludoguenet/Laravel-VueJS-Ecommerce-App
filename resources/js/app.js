@@ -12,7 +12,7 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-const app = createApp({});
+const app = createApp();
 app.use(Toaster).provide('toast', app.config.globalProperties.$toast);
 
 app
