@@ -4,7 +4,7 @@
           <div id="payment-element">
             <!--Stripe.js injects the Payment Element-->
           </div>
-          <button id="submit">
+          <button id="submit" v-on:click.prevent="handleSubmit">
             <div class="spinner hidden" id="spinner"></div>
             <span id="button-text">Payer</span>
           </button>
@@ -18,17 +18,16 @@ import { onMounted } from 'vue';
 import useStripe from '../composables/checkout/stripe.js';
 
 const {
-    elements,
-    clientSecret,
-    stripe,
-    paymentElement,
     getClientSecret,
-    loadStripeElements
+    loadStripeElements,
+    handleSubmit,
+    checkStatus
 } = useStripe();
 
 onMounted(async () => {
     await getClientSecret();
     await loadStripeElements();
+    await checkStatus();
 });
 </script>
 

@@ -14,7 +14,7 @@ class CheckoutController extends Controller
 
     public function paymentIntent()
     {
-        \Stripe\Stripe::setApiKey('sk_test_51L3kquLRVvzp6xt9rynkwX0ZIbanFU0yKsjnhWcoMmZCdNv7N69jf715LXwem3W4GO7Kvczk7VBvOkzheOBweNwb00o9Cwsvu5');
+        \Stripe\Stripe::setApiKey(config('stripe.test_secret_key'));
 
         header('Content-Type: application/json');
 

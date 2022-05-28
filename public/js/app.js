@@ -24770,12 +24770,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     expose();
 
     var _useStripe = (0,_composables_checkout_stripe_js__WEBPACK_IMPORTED_MODULE_2__["default"])(),
-        elements = _useStripe.elements,
-        clientSecret = _useStripe.clientSecret,
-        stripe = _useStripe.stripe,
-        paymentElement = _useStripe.paymentElement,
         getClientSecret = _useStripe.getClientSecret,
-        loadStripeElements = _useStripe.loadStripeElements;
+        loadStripeElements = _useStripe.loadStripeElements,
+        handleSubmit = _useStripe.handleSubmit,
+        checkStatus = _useStripe.checkStatus;
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -24790,6 +24788,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return loadStripeElements();
 
             case 4:
+              _context.next = 6;
+              return checkStatus();
+
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -24797,12 +24799,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     })));
     var __returned__ = {
-      elements: elements,
-      clientSecret: clientSecret,
-      stripe: stripe,
-      paymentElement: paymentElement,
       getClientSecret: getClientSecret,
       loadStripeElements: loadStripeElements,
+      handleSubmit: handleSubmit,
+      checkStatus: checkStatus,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_1__.onMounted,
       useStripe: _composables_checkout_stripe_js__WEBPACK_IMPORTED_MODULE_2__["default"]
     };
@@ -25113,12 +25113,53 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "form-container"
 };
+var _hoisted_2 = {
+  id: "payment-form"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<form id=\"payment-form\" data-v-715e4fb1><div id=\"payment-element\" data-v-715e4fb1><!--Stripe.js injects the Payment Element--></div><button id=\"submit\" data-v-715e4fb1><div class=\"spinner hidden\" id=\"spinner\" data-v-715e4fb1></div><span id=\"button-text\" data-v-715e4fb1>Payer</span></button><div id=\"payment-message\" class=\"hidden\" data-v-715e4fb1></div></form>", 1);
+var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    id: "payment-element"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Stripe.js injects the Payment Element")], -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "spinner hidden",
+    id: "spinner"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+    id: "button-text"
+  }, "Payer", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_6 = [_hoisted_4, _hoisted_5];
+
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    id: "payment-message",
+    "class": "hidden"
+  }, null, -1
+  /* HOISTED */
+  );
+});
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    id: "submit",
+    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.handleSubmit && $setup.handleSubmit.apply($setup, arguments);
+    }, ["prevent"]))
+  }, _hoisted_6), _hoisted_7])]);
 }
 
 /***/ }),
@@ -25670,13 +25711,138 @@ function useStripe() {
     };
   }();
 
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var _yield$stripe$value$c, error;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              setLoading(true);
+              _context3.next = 3;
+              return stripe.value.confirmPayment({
+                elements: elements.value,
+                confirmParams: {
+                  return_url: "https://vuecommerce.test" + '/dashboard'
+                }
+              });
+
+            case 3:
+              _yield$stripe$value$c = _context3.sent;
+              error = _yield$stripe$value$c.error;
+
+              if (error.type === "card_error" || error.type === "validation_error") {
+                showMessage(error.message);
+              } else {
+                showMessage("An unexpected error occured.");
+              }
+
+              setLoading(false);
+
+            case 7:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function handleSubmit() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var checkStatus = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var clientSecret, _yield$stripe$value$r, paymentIntent;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              clientSecret = new URLSearchParams(window.location.search).get("payment_intent_client_secret");
+
+              if (clientSecret) {
+                _context4.next = 3;
+                break;
+              }
+
+              return _context4.abrupt("return");
+
+            case 3:
+              _context4.next = 5;
+              return stripe.value.retrievePaymentIntent(clientSecret);
+
+            case 5:
+              _yield$stripe$value$r = _context4.sent;
+              paymentIntent = _yield$stripe$value$r.paymentIntent;
+              _context4.t0 = paymentIntent.status;
+              _context4.next = _context4.t0 === "succeeded" ? 10 : _context4.t0 === "processing" ? 12 : _context4.t0 === "requires_payment_method" ? 14 : 16;
+              break;
+
+            case 10:
+              showMessage("Payment succeeded!");
+              return _context4.abrupt("break", 18);
+
+            case 12:
+              showMessage("Your payment is processing.");
+              return _context4.abrupt("break", 18);
+
+            case 14:
+              showMessage("Your payment was not successful, please try again.");
+              return _context4.abrupt("break", 18);
+
+            case 16:
+              showMessage("Something went wrong.");
+              return _context4.abrupt("break", 18);
+
+            case 18:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function checkStatus() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+  /**
+   * UI Helpers
+   */
+
+
+  var showMessage = function showMessage(messageText) {
+    var messageContainer = document.querySelector("#payment-message");
+    messageContainer.classList.remove("hidden");
+    messageContainer.textContent = messageText;
+    setTimeout(function () {
+      messageContainer.classList.add("hidden");
+      messageText.textContent = "";
+    }, 4000);
+  };
+
+  var setLoading = function setLoading(isLoading) {
+    if (isLoading) {
+      // Disable the button and show a spinner
+      document.querySelector("#submit").disabled = true;
+      document.querySelector("#spinner").classList.remove("hidden");
+      document.querySelector("#button-text").classList.add("hidden");
+    } else {
+      document.querySelector("#submit").disabled = false;
+      document.querySelector("#spinner").classList.add("hidden");
+      document.querySelector("#button-text").classList.remove("hidden");
+    }
+  };
+
   return {
-    elements: elements,
     clientSecret: clientSecret,
-    stripe: stripe,
-    paymentElement: paymentElement,
+    loadStripeElements: loadStripeElements,
+    handleSubmit: handleSubmit,
     getClientSecret: getClientSecret,
-    loadStripeElements: loadStripeElements
+    checkStatus: checkStatus
   };
 }
 
