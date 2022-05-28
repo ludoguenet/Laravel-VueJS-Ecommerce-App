@@ -33,6 +33,7 @@ Route::get('/clear', function () {
 });
 
 Route::get('/dashboard', function () {
+    dd(request());
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 

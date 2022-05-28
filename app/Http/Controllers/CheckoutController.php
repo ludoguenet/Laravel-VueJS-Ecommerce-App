@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CheckoutController extends Controller
 {
     public function create()
-    {
+    { 
         return view('checkout.create');
     }
 
@@ -30,6 +30,9 @@ class CheckoutController extends Controller
                 'automatic_payment_methods' => [
                     'enabled' => true,
                 ],
+                "metadata" => [
+                    "order_items" => (new CartRepository())->jsonOrderItems()
+                ]
             ]);
         
             $output = [

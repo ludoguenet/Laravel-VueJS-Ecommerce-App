@@ -36,6 +36,20 @@ class CartRepository
             ->getContent();
     }
 
+    public function jsonOrderItems(): string
+    {
+        return $this
+            ->content()
+            ->map(function ($orderItem) {
+                return [
+                    'name' => $orderItem->name,
+                    'quantity' => $orderItem->quantity,
+                    'price' => $orderItem->price,
+                ];
+            })
+            ->toJson();
+    }
+
     public function count(): int
     {
         return $this->content()
