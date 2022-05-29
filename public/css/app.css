@@ -837,6 +837,9 @@ select {
 .shrink-0 {
   flex-shrink: 0;
 }
+.table-auto {
+  table-layout: auto;
+}
 .origin-top-left {
   transform-origin: top left;
 }

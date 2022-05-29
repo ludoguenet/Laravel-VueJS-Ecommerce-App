@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Repositories\CartRepository;
 
 class OrderController extends Controller
 {
@@ -36,7 +37,18 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $order = auth()->user()->orders()->create([
+            'order_number' => uniqid()
+        ]);
+
+        $products = (new CartRepository())->content();
+
+        $products->each(function ($product) use($order) {
+            $order->products()->attach($product->id, [
+                'price' => $product->price,
+                'quantity' => $product->quantity,
+            ]);
+        });
     }
 
     /**

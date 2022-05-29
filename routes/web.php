@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,13 +29,17 @@ Route::resource('products', ProductController::class);
 Route::get('shoppingCart', [CartController::class, 'index'])
     ->name('cart.index');
 
+Route::resource('orders', OrderController::class);
+
 Route::get('/clear', function () {
     \Cart::session(auth()->user()->id)->clear();
 });
 
 Route::get('/dashboard', function () {
-    dd(request());
-    return view('dashboard');
+    $orders = auth()->user()->orders;
+    return view('dashboard', compact('orders'));
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/thankyou', fn() => 'Merci de votre commande!');
 
 require __DIR__.'/auth.php';
