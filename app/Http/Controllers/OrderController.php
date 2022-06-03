@@ -41,14 +41,16 @@ class OrderController extends Controller
             'order_number' => uniqid()
         ]);
 
-        $products = (new CartRepository())->content();
-
-        $products->each(function ($product) use($order) {
-            $order->products()->attach($product->id, [
-                'price' => $product->price,
-                'quantity' => $product->quantity,
-            ]);
-        });
+        (new CartRepository())
+            ->content()
+            ->each(function ($product) use($order) {
+                $order->products()->attach($product->id, [
+                    'price' => $product->price * $product->quantity,
+                    'quantity' => $product->quantity,
+                ]);
+            });
+            
+        (new CartRepository())->clear();
     }
 
     /**

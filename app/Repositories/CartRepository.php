@@ -82,6 +82,11 @@ class CartRepository
             ));
     }
 
+    public function clear()
+    {
+        \Cart::session(auth()->user()->id)->clear();
+    }
+
     private function getItem(int $rowId)
     {
         return \Cart::session(auth()->user()->id)
